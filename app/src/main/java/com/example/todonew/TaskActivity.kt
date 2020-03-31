@@ -59,8 +59,6 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setUpSpinner() {
         val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels)
-
-        labels.sort()
         spinnerCategory.adapter = adapter
     }
 
@@ -83,6 +81,8 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun openDialog(list : ArrayList<String>) {
+
+        val abc:ArrayList<String> = list.clone() as ArrayList<String>
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.addcat_dialog, null)
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
@@ -92,7 +92,10 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         mDialogView.dialogSaveBtn.setOnClickListener {
             mAlertDialog.dismiss()
             val name = mDialogView.addCatText.text.toString()
+            list.clear()
             list.add(name)
+            list.addAll(abc)
+            setUpSpinner()
         }
         mDialogView.dialogCancelBtn.setOnClickListener {
             mAlertDialog.dismiss()

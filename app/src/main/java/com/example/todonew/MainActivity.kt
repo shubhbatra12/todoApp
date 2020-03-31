@@ -1,7 +1,6 @@
 package com.example.todonew
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
@@ -17,13 +16,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_task.*
-import kotlinx.android.synthetic.main.activity_task.view.*
-import kotlinx.android.synthetic.main.addcat_dialog.*
-import kotlinx.android.synthetic.main.addcat_dialog.view.*
-import kotlinx.android.synthetic.main.addcat_dialog.view.dialogCancelBtn
-import kotlinx.android.synthetic.main.addcat_dialog.view.dialogSaveBtn
-import kotlinx.android.synthetic.main.filter_dialog.*
 import kotlinx.android.synthetic.main.filter_dialog.view.*
 import kotlinx.android.synthetic.main.item_todo.*
 import kotlinx.android.synthetic.main.item_todo.view.*
@@ -38,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private val labels = arrayListOf(
         "Personal", "Business", "Insurance", "Shopping", "Banking"
     )
-    val list = arrayListOf<TodoModel>()
+    private val list = arrayListOf<TodoModel>()
     var adapter = TodoAdapter(list)
 
     val db by lazy {
@@ -49,8 +41,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        //setUpSpinnerFilter()
 
         todoRv.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -73,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun initSwipe() {
+    private fun initSwipe() {
         val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -228,7 +218,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, HistoryActivity::class.java))
             }
             R.id.filter ->{
-                //setUpSpinnerFilter()
                 openDialog()
             }
         }
@@ -247,8 +236,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openDialog() {
-
-        //setUpSpinnerFilter()
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.filter_dialog, null,false)
 
