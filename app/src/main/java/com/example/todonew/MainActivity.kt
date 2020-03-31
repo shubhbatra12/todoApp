@@ -1,11 +1,15 @@
 package com.example.todonew
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -13,12 +17,24 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_task.*
+import kotlinx.android.synthetic.main.activity_task.view.*
+import kotlinx.android.synthetic.main.addcat_dialog.view.*
+import kotlinx.android.synthetic.main.filter_dialog.*
+import kotlinx.android.synthetic.main.filter_dialog.view.*
+import kotlinx.android.synthetic.main.item_todo.*
+import kotlinx.android.synthetic.main.item_todo.view.*
+import kotlinx.android.synthetic.main.item_todo.view.txtShowCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
+
+    val labels = arrayListOf(
+        "Personal", "Business", "Insurance", "Shopping", "Banking"
+    )
     val list = arrayListOf<TodoModel>()
     var adapter = TodoAdapter(list)
 
@@ -30,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
         todoRv.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = this@MainActivity.adapter
@@ -192,6 +209,7 @@ class MainActivity : AppCompatActivity() {
                 list.addAll(
                     it.filter { todo ->
                         todo.title.contains(newText,true)
+                                ||todo.category.contains(newText,true)
                     }
                 )
                 adapter.notifyDataSetChanged()
@@ -204,11 +222,56 @@ class MainActivity : AppCompatActivity() {
             R.id.history -> {
                 startActivity(Intent(this, HistoryActivity::class.java))
             }
+            //WORK IN PROGRESS
+            R.id.filter ->{
+//                setUpSpinnerFilter()
+                openDialog(labels)
+                Toast.makeText(this,"WORK IN PROGRESS",Toast.LENGTH_SHORT).show()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     fun openNewTask(view: View) {
-        startActivity(Intent(this, TaskActivity::class.java))
+        val i = Intent(this, TaskActivity::class.java)
+        startActivity(i)
     }
+
+//    private fun setUpSpinnerFilter() {
+//        val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels)
+//        labels.sort()
+//        spinnerFilter.adapter = adapter
+//    }
+
+    private fun openDialog(list : ArrayList<String>) {
+
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.filter_dialog, null)
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Filter")
+            .setCancelable(true)
+        val  mAlertDialog = mBuilder.show()
+
+        mDialogView.dialogSaveBtn.setOnClickListener {
+            mAlertDialog.dismiss()
+            //val name = mDialogView.spinnerFilter.selectedItem.toString()
+            //list.add(name)
+        }
+        mDialogView.dialogCancelBtn.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
+
+    }
+//WORK IN PROGRESS
+    fun open1(view: View) {
+        val title = view.txtShowTitle.text.toString()
+        val task = view.txtShowTask.text.toString()
+        val category = txtShowCategory.text.toString()
+        val i = Intent(this,EditTaskActivity::class.java)
+        i.putExtra("titleee",title)
+        i.putExtra("taskkk",task)
+        //startActivity(i)
+    Toast.makeText(this,"WORK IN PROGRESS",Toast.LENGTH_SHORT).show()
+    }
+
 }

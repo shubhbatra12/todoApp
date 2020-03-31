@@ -18,6 +18,7 @@ import android.widget.Toast.LENGTH_SHORT
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.android.synthetic.main.addcat_dialog.view.*
+import kotlinx.android.synthetic.main.item_todo.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,8 +27,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-const val DB_NAME = "todo.db"
-class TaskActivity : AppCompatActivity(), View.OnClickListener {
+
+class EditTaskActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var myCalendar: Calendar
     lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
@@ -53,7 +54,16 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         saveBtn.setOnClickListener(this)
         imgAddCategory.setOnClickListener(this)
 
+        val titlee :String = intent.getStringExtra("titleee")
+        val taskk: String = intent.getStringExtra("taskkk")
 
+
+        if (titlee!=null){
+            txtShowTitle.text = titlee.toString()
+        }
+        if (taskk!=null){
+            txtShowTask.text = taskk.toString()
+        }
         setUpSpinner()
     }
 
@@ -175,3 +185,4 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 }
+
