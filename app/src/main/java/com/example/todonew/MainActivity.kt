@@ -9,9 +9,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -242,10 +240,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(i)
     }
 
-    private fun setUpSpinnerFilter() {
+    private fun setUpSpinnerFilter(spinner: Spinner) {
         val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels)
         labels.sort()
-        spinnerFilter.adapter = adapter
+        spinner.adapter = adapter
     }
 
     private fun openDialog() {
@@ -261,7 +259,7 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(true)
         val  mAlertDialog = mBuilder.show()
 
-        //setUpSpinnerFilter()
+        setUpSpinnerFilter(mDialogView.spinnerFilter)
 
         mDialogView.dialogSaveBtnFilter.setOnClickListener {
             mAlertDialog.dismiss()
