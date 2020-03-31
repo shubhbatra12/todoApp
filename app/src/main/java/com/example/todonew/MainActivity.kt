@@ -1,6 +1,7 @@
 package com.example.todonew
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.*
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -19,7 +21,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.android.synthetic.main.activity_task.view.*
+import kotlinx.android.synthetic.main.addcat_dialog.*
 import kotlinx.android.synthetic.main.addcat_dialog.view.*
+import kotlinx.android.synthetic.main.addcat_dialog.view.dialogCancelBtn
+import kotlinx.android.synthetic.main.addcat_dialog.view.dialogSaveBtn
 import kotlinx.android.synthetic.main.filter_dialog.*
 import kotlinx.android.synthetic.main.filter_dialog.view.*
 import kotlinx.android.synthetic.main.item_todo.*
@@ -245,21 +250,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun openDialog(list : ArrayList<String>) {
 
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.filter_dialog, null)
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.filter_dialog, null,false)
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle("Filter")
             .setCancelable(true)
         val  mAlertDialog = mBuilder.show()
 
-        mDialogView.dialogSaveBtn.setOnClickListener {
+        mDialogView.dialogSaveBtn1.setOnClickListener {
             mAlertDialog.dismiss()
             //val name = mDialogView.spinnerFilter.selectedItem.toString()
             //list.add(name)
         }
-        mDialogView.dialogCancelBtn.setOnClickListener {
+        mDialogView.dialogCancelBtn1.setOnClickListener {
             mAlertDialog.dismiss()
         }
+
 
     }
 //WORK IN PROGRESS
@@ -270,8 +276,8 @@ class MainActivity : AppCompatActivity() {
         val i = Intent(this,EditTaskActivity::class.java)
         i.putExtra("titleee",title)
         i.putExtra("taskkk",task)
-        //startActivity(i)
-    Toast.makeText(this,"WORK IN PROGRESS",Toast.LENGTH_SHORT).show()
+        startActivity(i)
+//    Toast.makeText(this,"WORK IN PROGRESS",Toast.LENGTH_SHORT).show()
     }
 
 }
