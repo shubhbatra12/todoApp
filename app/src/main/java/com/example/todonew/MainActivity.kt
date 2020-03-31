@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
 
-    val labels = arrayListOf(
+    private val labels = arrayListOf(
         "Personal", "Business", "Insurance", "Shopping", "Banking"
     )
     val list = arrayListOf<TodoModel>()
@@ -51,6 +51,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        //setUpSpinnerFilter()
 
         todoRv.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -227,11 +229,9 @@ class MainActivity : AppCompatActivity() {
             R.id.history -> {
                 startActivity(Intent(this, HistoryActivity::class.java))
             }
-            //WORK IN PROGRESS
             R.id.filter ->{
-//                setUpSpinnerFilter()
-                openDialog(labels)
-                Toast.makeText(this,"WORK IN PROGRESS",Toast.LENGTH_SHORT).show()
+                //setUpSpinnerFilter()
+                openDialog()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -242,42 +242,48 @@ class MainActivity : AppCompatActivity() {
         startActivity(i)
     }
 
-//    private fun setUpSpinnerFilter() {
-//        val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels)
-//        labels.sort()
-//        spinnerFilter.adapter = adapter
-//    }
+    private fun setUpSpinnerFilter() {
+        val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels)
+        labels.sort()
+        spinnerFilter.adapter = adapter
+    }
 
-    private fun openDialog(list : ArrayList<String>) {
+    private fun openDialog() {
+
+        //setUpSpinnerFilter()
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.filter_dialog, null,false)
+
+
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle("Filter")
             .setCancelable(true)
         val  mAlertDialog = mBuilder.show()
 
-        mDialogView.dialogSaveBtn1.setOnClickListener {
+        //setUpSpinnerFilter()
+
+        mDialogView.dialogSaveBtnFilter.setOnClickListener {
             mAlertDialog.dismiss()
-            //val name = mDialogView.spinnerFilter.selectedItem.toString()
-            //list.add(name)
+            val name = mDialogView.spinnerFilter.selectedItem.toString()
+            displayTodo(name)//Call Function here for filtering
         }
-        mDialogView.dialogCancelBtn1.setOnClickListener {
+        mDialogView.dialogRemoveBtnFilter.setOnClickListener {
             mAlertDialog.dismiss()
+            displayTodo()
         }
 
 
     }
-//WORK IN PROGRESS
-    fun open1(view: View) {
+
+    fun openEdit(view: View) {
         val title = view.txtShowTitle.text.toString()
         val task = view.txtShowTask.text.toString()
         val category = txtShowCategory.text.toString()
         val i = Intent(this,EditTaskActivity::class.java)
-        i.putExtra("titleee",title)
-        i.putExtra("taskkk",task)
+        i.putExtra("Title",title)
+        i.putExtra("Task",task)
         startActivity(i)
-//    Toast.makeText(this,"WORK IN PROGRESS",Toast.LENGTH_SHORT).show()
     }
 
 }

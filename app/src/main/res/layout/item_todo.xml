@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:onClick="open1"
+            android:onClick="openEdit"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:padding="5dp">
