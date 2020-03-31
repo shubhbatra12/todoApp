@@ -54,15 +54,15 @@ class EditTaskActivity : AppCompatActivity(), View.OnClickListener {
         saveBtn.setOnClickListener(this)
         imgAddCategory.setOnClickListener(this)
 
-        val titlee :String = intent.getStringExtra("titleee")
-        val taskk: String = intent.getStringExtra("taskkk")
+        val title :String = intent.getStringExtra("Title")
+        val task: String = intent.getStringExtra("Task")
 
 
-        if (titlee!=null){
-            titleInpLay.editText?.text?.append(titlee)
+        if (title!=null){
+            titleInpLay.editText?.text?.append(title)
         }
-        if (taskk!=null){
-            taskInpLay.editText?.text?.append(taskk)
+        if (task!=null){
+            taskInpLay.editText?.text?.append(task)
         }
         setUpSpinner()
     }

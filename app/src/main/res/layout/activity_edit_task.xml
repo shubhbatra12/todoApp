@@ -49,10 +49,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Task Title"
-            android:paddingStart="8dp"
             android:inputType="textCapWords"
+            android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
