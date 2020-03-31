@@ -59,10 +59,10 @@ class EditTaskActivity : AppCompatActivity(), View.OnClickListener {
 
 
         if (titlee!=null){
-            txtShowTitle.text = titlee.toString()
+            titleInpLay.editText?.text?.append(titlee)
         }
         if (taskk!=null){
-            txtShowTask.text = taskk.toString()
+            taskInpLay.editText?.text?.append(taskk)
         }
         setUpSpinner()
     }
