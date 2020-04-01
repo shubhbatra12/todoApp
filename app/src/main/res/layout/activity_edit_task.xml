@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:id="@+id/titleInpLay"
+        android:id="@+id/titleInpLayEdit"
         app:hintTextColor="@color/colorAccent"
         app:boxStrokeColor="@color/colorAccent"
         android:layout_marginEnd="16dp"
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:id="@+id/taskInpLay"
+        android:id="@+id/taskInpLayEdit"
         app:hintTextColor="@color/colorAccent"
         app:boxStrokeColor="@color/colorAccent"
         android:layout_marginEnd="16dp"
@@ -111,7 +111,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dateEdt"
+            android:id="@+id/dateEdit"
             android:hint="Set Date"
             android:clickable="true"
             android:drawableEnd="@drawable/baseline_calendar_today_black_24dp"
@@ -126,14 +126,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/timeInptlay"
         app.boxStrokeColor="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:hintTextColor="@color/colorAccent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -141,7 +140,7 @@
             android:layout_height="wrap_content"
             android:hint="Set Time"
             android:clickable="true"
-            android:id="@+id/timeEdt"
+            android:id="@+id/timeEdit"
             android:cursorVisible="false"
             android:drawablePadding="8dp"
             android:drawableEnd="@drawable/baseline_alarm_add_black_24dp"
@@ -163,14 +162,14 @@
         android:layout_marginTop="16dp">
 
         <Spinner
-            android:id="@+id/spinnerCategory"
+            android:id="@+id/spinnerCategoryEdit"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"/>
 
         <ImageView
-            android:id="@+id/imgAddCategory"
+            android:id="@+id/imgAddCategoryEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_alarm_add_black_24dp"/>
@@ -181,7 +180,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Apply Changes"
-        android:id="@+id/saveBtn"
+        android:id="@+id/applyBtn"
         android:backgroundTint="@color/colorAccent"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"

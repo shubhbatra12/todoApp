@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+
         todoRv.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = this@MainActivity.adapter
@@ -264,10 +265,14 @@ class MainActivity : AppCompatActivity() {
     fun openEdit(view: View) {
         val title = view.txtShowTitle.text.toString()
         val task = view.txtShowTask.text.toString()
-        val category = txtShowCategory.text.toString()
+        val category = view.txtShowCategory.text.toString()
+        val time  = view.txtShowTime.text.toString()
+        val date = view.txtShowDate.text.toString()
         val i = Intent(this,EditTaskActivity::class.java)
         i.putExtra("Title",title)
         i.putExtra("Task",task)
+        i.putExtra("Time",time)
+        i.putExtra("Date",date)
         startActivity(i)
     }
 

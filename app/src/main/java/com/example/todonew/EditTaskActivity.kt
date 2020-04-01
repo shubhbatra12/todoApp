@@ -16,7 +16,16 @@ import android.widget.TimePicker
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.room.Room
+import kotlinx.android.synthetic.main.activity_edit_task.*
 import kotlinx.android.synthetic.main.activity_task.*
+import kotlinx.android.synthetic.main.activity_task.dateEdt
+import kotlinx.android.synthetic.main.activity_task.imgAddCategory
+import kotlinx.android.synthetic.main.activity_task.saveBtn
+import kotlinx.android.synthetic.main.activity_task.spinnerCategory
+import kotlinx.android.synthetic.main.activity_task.taskInpLay
+import kotlinx.android.synthetic.main.activity_task.timeEdt
+import kotlinx.android.synthetic.main.activity_task.timeInptlay
+import kotlinx.android.synthetic.main.activity_task.titleInpLay
 import kotlinx.android.synthetic.main.addcat_dialog.view.*
 import kotlinx.android.synthetic.main.item_todo.*
 import kotlinx.coroutines.Dispatchers
@@ -47,23 +56,24 @@ class EditTaskActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_task)
+        setContentView(R.layout.activity_edit_task)
 
-        dateEdt.setOnClickListener(this)
-        timeEdt.setOnClickListener(this)
-        saveBtn.setOnClickListener(this)
-        imgAddCategory.setOnClickListener(this)
+        dateEdit.setOnClickListener(this)
+        timeEdit.setOnClickListener(this)
+        applyBtn.setOnClickListener(this)
+        imgAddCategoryEdit.setOnClickListener(this)
 
         val title :String = intent.getStringExtra("Title")
         val task: String = intent.getStringExtra("Task")
+        val time = intent.getStringExtra("Time")
+        val date = intent.getStringExtra("Date")
 
 
-        if (title!=null){
-            titleInpLay.editText?.text?.append(title)
-        }
-        if (task!=null){
-            taskInpLay.editText?.text?.append(task)
-        }
+        titleInpLayEdit.editText?.text?.append(title)
+        taskInpLayEdit.editText?.text?.append(task)
+        dateEdit.setText(date)
+        timeEdit.setText(time)
+
         setUpSpinner()
     }
 
@@ -71,21 +81,21 @@ class EditTaskActivity : AppCompatActivity(), View.OnClickListener {
         val adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,labels)
 
         labels.sort()
-        spinnerCategory.adapter = adapter
+        spinnerCategoryEdit.adapter = adapter
     }
 
     override fun onClick(v: View) {
         when(v.id){
-            R.id.dateEdt -> {
+            R.id.dateEdit -> {
                 setListener()
             }
-            R.id.timeEdt -> {
+            R.id.timeEdit -> {
                 setTimeListener()
             }
-            R.id.saveBtn -> {
+            R.id.applyBtn -> {
                 saveTodo()
             }
-            R.id.imgAddCategory -> {
+            R.id.imgAddCategoryEdit -> {
 
                 openDialog(labels)
             }
@@ -113,9 +123,9 @@ class EditTaskActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun saveTodo() {
-        val category = spinnerCategory.selectedItem.toString()
-        val title = titleInpLay.editText?.text.toString()
-        val description = taskInpLay.editText?.text.toString()
+        val category = spinnerCategoryEdit.selectedItem.toString()
+        val title = titleInpLayEdit.editText?.text.toString()
+        val description = taskInpLayEdit.editText?.text.toString()
 
         GlobalScope.launch(Dispatchers.Main) {
             val id = withContext(Dispatchers.IO) {
@@ -153,7 +163,7 @@ class EditTaskActivity : AppCompatActivity(), View.OnClickListener {
         val myFormat = "h:mm a"
         val sdf = SimpleDateFormat(myFormat)  // it doesnt have to be converted into time ?
         finalTime = myCalendar.time.time
-        timeEdt.setText(sdf.format(myCalendar.time))
+        timeEdit.setText(sdf.format(myCalendar.time))
 
     }
 
@@ -179,9 +189,7 @@ class EditTaskActivity : AppCompatActivity(), View.OnClickListener {
         val myFormat = "EEE, d MMM YYYY"
         val sdf = SimpleDateFormat(myFormat)
         finalDate = myCalendar.time.time
-        dateEdt.setText(sdf.format(myCalendar.time))
-
-        timeInptlay.visibility= View.VISIBLE
+        dateEdit.setText(sdf.format(myCalendar.time))
     }
 
 }
