@@ -20,6 +20,7 @@
         android:id="@+id/historyRv"
         tools:itemCount="3"
         android:padding="8dp"
+        android:clickable="false"
         tools:listitem="@layout/item_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

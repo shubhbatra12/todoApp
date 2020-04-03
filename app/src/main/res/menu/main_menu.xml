@@ -12,6 +12,10 @@
         android:title="History"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/deleteAll"
+        android:title="Delete All"
+        app:showAsAction="never"/>
+
     <item android:id="@+id/search"
         android:title="Search"
         android:icon="@drawable/icons8search100"

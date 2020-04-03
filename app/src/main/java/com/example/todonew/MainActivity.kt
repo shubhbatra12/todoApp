@@ -221,6 +221,9 @@ class MainActivity : AppCompatActivity() {
             R.id.filter ->{
                 openDialog()
             }
+            R.id.deleteAll ->{
+
+            }
         }
         return super.onOptionsItemSelected(item)
     }

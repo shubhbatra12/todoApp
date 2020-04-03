@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#ffa726</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#ec407a</color>
+    <color name="LightBlue">#29b6f6</color>
 <!--#6200EE,#3700B3,#03DAC5-->
     <array name="random_color">
         <item name="red_400" type="color">#84e40</item>
