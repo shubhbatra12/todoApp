@@ -222,7 +222,9 @@ class MainActivity : AppCompatActivity() {
                 openDialog()
             }
             R.id.deleteAll ->{
-
+                GlobalScope.launch(Dispatchers.IO) {
+                    db.todoDao().deleteAllPendingTasks()
+                }
             }
         }
         return super.onOptionsItemSelected(item)

@@ -18,4 +18,10 @@ interface TodoDao {
 
     @Query("Delete from TodoModel where id=:uid")
     fun deleteTask(uid:Long)
+
+    @Query("Delete from TodoModel where isFinished = 0")
+    fun deleteAllPendingTasks()
+
+    @Query("Delete from TodoModel where isFinished = 1")
+    fun deleteAllCompletedTasks()
 }
