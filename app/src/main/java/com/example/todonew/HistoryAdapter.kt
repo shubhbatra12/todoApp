@@ -33,8 +33,6 @@ class HistoryAdapter(val list: List<TodoModel>) : RecyclerView.Adapter<HistoryAd
         @SuppressLint("ResourceAsColor")
         fun bind(todoModel: TodoModel) {
             with(itemView) {
-//                val colors = resources.getIntArray(R.array.random_color)
-//                val randomColor = colors[Random().nextInt(colors.size)]
                 viewColorTagHis.setBackgroundColor(R.color.LightBlue)
                 txtShowTitleHis.text = todoModel.title
                 txtShowTaskHis.text = todoModel.description
