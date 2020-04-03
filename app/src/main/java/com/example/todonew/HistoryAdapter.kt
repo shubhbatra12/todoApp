@@ -30,10 +30,9 @@ class HistoryAdapter(val list: List<TodoModel>) : RecyclerView.Adapter<HistoryAd
     }
 
     class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @SuppressLint("ResourceAsColor")
         fun bind(todoModel: TodoModel) {
             with(itemView) {
-                viewColorTagHis.setBackgroundColor(R.color.LightBlue)
+                viewColorTagHis.setBackgroundColor(resources.getColor(R.color.LightBlue))
                 txtShowTitleHis.text = todoModel.title
                 txtShowTaskHis.text = todoModel.description
                 txtShowCategoryHis.text = todoModel.category
