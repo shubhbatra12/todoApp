@@ -23,5 +23,5 @@ interface TodoDao {
     fun deleteAllPendingTasks()
 
     @Query("Delete from TodoModel where isFinished = 1")
-    fun deleteAllCompletedTasks()
+    fun deleteAllFinishedTasks()
 }
