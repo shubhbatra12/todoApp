@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditTaskActivity"></activity>
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".TaskActivity" />
+        <activity android:name=".EditTaskActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".HistoryActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".TaskActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

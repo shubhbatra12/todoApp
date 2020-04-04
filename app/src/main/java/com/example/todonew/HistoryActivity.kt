@@ -1,17 +1,15 @@
 package com.example.todonew
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.Observer as Observer1
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -25,18 +23,20 @@ class HistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            historyRv.apply {
-                layoutManager = LinearLayoutManager(this@HistoryActivity)
-                adapter = this@HistoryActivity.adapter
-            }
+        historyRv.apply {
+            layoutManager = LinearLayoutManager(this@HistoryActivity)
+            adapter = this@HistoryActivity.adapter
+        }
 
         db.historyDao().getTask().observe(this, Observer {
             if (!it.isNullOrEmpty()) {
                 listHist.clear()
                 listHist.addAll(it)
                 adapter.notifyDataSetChanged()
-            }else{
+            } else {
                 listHist.clear()
                 adapter.notifyDataSetChanged()
             }
@@ -52,7 +52,7 @@ class HistoryActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.clearHistory ->{
+            R.id.clearHistory -> {
                 GlobalScope.launch(Dispatchers.IO) {
                     db.todoDao().deleteAllFinishedTasks()
                 }
