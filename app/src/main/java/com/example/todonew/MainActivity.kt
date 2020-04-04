@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.delete_dialog.view.*
 import kotlinx.android.synthetic.main.filter_dialog.view.*
 import kotlinx.android.synthetic.main.item_todo.*
 import kotlinx.android.synthetic.main.item_todo.view.*
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
 
         todoRv.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -223,9 +223,7 @@ class MainActivity : AppCompatActivity() {
                 openDialog()
             }
             R.id.deleteAll ->{
-                GlobalScope.launch(Dispatchers.IO) {
-                    db.todoDao().deleteAllPendingTasks()
-                }
+                openDeleteDialog()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -264,7 +262,24 @@ class MainActivity : AppCompatActivity() {
             mAlertDialog.dismiss()
             displayTodo()
         }
+    }
 
+    private fun openDeleteDialog() {
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.delete_dialog, null)
+        val mBuilder = AlertDialog.Builder(this)
+            .setView(mDialogView)
+            .setTitle("Delete")
+        val  mAlertDialog = mBuilder.show()
+
+        mDialogView.dialogApplyBtnDel.setOnClickListener {
+            mAlertDialog.dismiss()
+            GlobalScope.launch(Dispatchers.IO) {
+                db.todoDao().deleteAllPendingTasks()
+            }
+        }
+        mDialogView.dialogCancelBtnDel.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
 
     }
 
