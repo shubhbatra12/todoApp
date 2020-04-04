@@ -78,6 +78,5 @@ class HistoryActivity : AppCompatActivity() {
         mDialogView.dialogCancelBtnDel.setOnClickListener {
             mAlertDialog.dismiss()
         }
-
     }
 }
