@@ -24,6 +24,7 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         historyRv.apply {
             layoutManager = LinearLayoutManager(this@HistoryActivity)
